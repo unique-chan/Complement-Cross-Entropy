@@ -4,27 +4,75 @@
     - progress_bar: progress bar mimic xlua.progress.
 '''
 import torch
-import os
 import sys
 import time
-import math
 
 import torch.nn as nn
 import torch.nn.init as init
+import torch.nn.functional as F
+
+from I_configuration import NUM_CLASSES
 
 
-def get_mean_and_std(dataset):
+class ComplementEntropy(nn.Module):
+    '''Compute the complement entropy of complement classes.'''
+    def __init__(self):
+        super(ComplementEntropy, self).__init__()
+        self.classes = NUM_CLASSES
+        self.batch_size = None
+
+    def forward(self, y_hat, y):
+        self.batch_size = len(y)
+        y_hat = F.softmax(y_hat, dim=1)
+        Yg = torch.gather(y_hat, 1, torch.unsqueeze(y, 1))
+        Yg_ = (1 - Yg) + 1e-7
+        Px = y_hat / Yg_.view(len(y_hat), 1)
+        Px_log = torch.log(Px + 1e-10)
+        y_zerohot = torch.ones(self.batch_size, self.classes).scatter_\
+            (1, y.view(self.batch_size, 1).data.cpu(), 0)
+        output = Px * Px_log * y_zerohot.cuda()
+        entropy = torch.sum(output)
+        entropy /= float(self.batch_size)
+        entropy /= float(self.classes)
+        return entropy
+
+
+class SimpleComplementEntropy1(nn.Module):
+    '''Compute the complement entropy of complement classes.'''
+    def __init__(self):
+        super(SimpleComplementEntropy1, self).__init__()
+        self.classes = NUM_CLASSES
+        self.batch_size = None
+
+    def forward(self, y_hat, y):
+        self.batch_size = len(y)
+        y_hat = F.softmax(y_hat, dim=1)
+        Yg = torch.gather(y_hat, 1, torch.unsqueeze(y, 1))
+        Yg_ = (1 - Yg) + 1e-7
+        Px = y_hat / Yg_.view(len(y_hat), 1)
+        Px_log = torch.log(Px + 1e-10)
+        y_zerohot = torch.ones(self.batch_size, self.classes).scatter_\
+            (1, y.view(self.batch_size, 1).data.cpu(), 0)
+        output = Px * Px_log * y_zerohot.cuda()
+        entropy = torch.sum(output)
+        entropy /= float(self.batch_size)
+        entropy /= float(self.classes)
+        return entropy
+
+
+def get_mean_and_std_for_3ch_only(train_data_loader, msg='train'):
     '''Compute the mean and std value of dataset.'''
-    dataloader = torch.utils.data.DataLoader(dataset, batch_size=1, shuffle=True, num_workers=2)
     mean = torch.zeros(3)
     std = torch.zeros(3)
-    print('==> Computing mean and std..')
-    for inputs, targets in dataloader:
+    print('computing mean and std...')
+    for inputs, targets in train_data_loader:
         for i in range(3):
-            mean[i] += inputs[:,i,:,:].mean()
-            std[i] += inputs[:,i,:,:].std()
-    mean.div_(len(dataset))
-    std.div_(len(dataset))
+            mean[i] += inputs[:, i, :, :].mean()
+            std[i] += inputs[:, i, :, :].std()
+    mean.div_(len(train_data_loader))
+    std.div_(len(train_data_loader))
+    print('▶ %s_mean:' % msg, mean)
+    print('▶ %s_std:' % msg, std)
     return mean, std
 
 
@@ -44,7 +92,7 @@ def init_params(net):
                 init.constant(m.bias, 0)
 
 
-TOTAL_BAR_LENGTH = 65.
+TOTAL_BAR_LENGTH = 50.
 last_time = time.time()
 begin_time = last_time
 
@@ -89,15 +137,15 @@ def progress_bar(front_msg, epoch_num, current_batch_idx, batch_size, msg=None):
 
 
 def format_time(seconds):
-    days = int(seconds / 3600/24)
-    seconds = seconds - days*3600*24
+    days = int(seconds / 3600 / 24)
+    seconds = seconds - days * 3600 * 24
     hours = int(seconds / 3600)
-    seconds = seconds - hours*3600
+    seconds = seconds - hours * 3600
     minutes = int(seconds / 60)
-    seconds = seconds - minutes*60
+    seconds = seconds - minutes * 60
     secondsf = int(seconds)
     seconds = seconds - secondsf
-    millis = int(seconds*1000)
+    millis = int(seconds * 1000)
 
     f = ''
     i = 1

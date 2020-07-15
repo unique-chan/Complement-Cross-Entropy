@@ -1,44 +1,71 @@
 # hyper parameters for training
 EPOCHS = 150
-BATCH_SIZE = 4
+BATCH_SIZE = 32
 NUM_CLASSES = 17
 IMAGE_HEIGHT = 224
 IMAGE_WIDTH = 224
 CHANNELS = 3
-LEARNING_RATE = 1e-5
+LEARNING_RATE = 1e-1
 
-save_model_dir = "saved_model/"
-save_every_n_epoch = 10
-test_image_dir = ""
+SAVE_CHECKPOINT_DIR = "./checkpoint/"
+# SAVE_CHECKPOINT_N_ITER = 100
 
-dataset_dir = "B_dataset/"
-train_dir = dataset_dir + "train"
-valid_dir = dataset_dir + "valid"
-test_dir = dataset_dir + "test"
+DATASET_DIR = "./B_dataset/"
+TRAIN_DIR = DATASET_DIR + "train"
+VALID_DIR = DATASET_DIR + "valid"
+TEST_DIR = DATASET_DIR + "test"
 
 TRAIN_SET_RATIO = 0.6
 TEST_SET_RATIO = 0
-# if TRAIN_SET_RATIO + TEST_SET_RATIO != 1 then VALID_SET_RATIO = 1 - (TRAIN_SET_RATIO + TEST_SET_RATIO).
+# if TRAIN_SET_RATIO + TEST_SET_RATIO != 1 then
+# VALID_SET_RATIO = 1 - (TRAIN_SET_RATIO + TEST_SET_RATIO).
 
-MODEL_INDEX = 30
-# choose a network (model index)
-# 0: mobilenet_v1, 1: mobilenet_v2, 2: mobilenet_v3_large, 3: mobilenet_v3_small
-# 4: efficient_net_b0, 5: efficient_net_b1, 6: efficient_net_b2, 7: efficient_net_b3
-# 8: efficient_net_b4, 9: efficient_net_b5, 10: efficient_net_b6, 11: efficient_net_b7
-# 12: ResNeXt50, 13: ResNeXt101
-# 14: InceptionV4, 15: InceptionResNetV1, 16: InceptionResNetV2
-# 17: SE_ResNet_50, 18: SE_ResNet_101, 19: SE_ResNet_152
-# 20: SqueezeNet
-# 21: DenseNet_121, 22: DenseNet_169, 23: DenseNet_201, 24: DenseNet_269
-# 25 ~ 28 : ShuffleNetV2 (0.5x, 1.0x, 1.5x, 2.0x)
-# 29: ResNet_18, 30: ResNet_34, 31: ResNet_50, 32: ResNet_101, 33: ResNet_152
+OBJ_FUNC_INDEX = 0
+# choose a objective function
+# 0: Cross Entropy
+# 1: COT        (Updating params once using Cross Entropy and once again with Complement Entropy)
+# 2: SCOT-1     (Updating params once using Cross Entropy + γ * Complement Entropy)
+# 3: SCOT-2     (Updating params once using only Complement Entropy)
 
-# EfficientNets:
-# b0 = (1.0, 1.0, 224, 0.2)
-# b1 = (1.0, 1.1, 240, 0.2)
-# b2 = (1.1, 1.2, 260, 0.3)
-# b3 = (1.2, 1.4, 300, 0.3)
-# b4 = (1.4, 1.8, 380, 0.4)
-# b5 = (1.6, 2.2, 456, 0.4)
-# b6 = (1.8, 2.6, 528, 0.5)
-# b7 = (2.0, 3.1, 600, 0.5)
+# if you use OBJ_FUNC_INDEX == 2, please set the gamma.
+GAMMA = 1
+
+MODEL_INDEX = 10
+# choose a network model
+#     model_dic = {
+#         0: torch_models.alexnet,
+#         1: torch_models.vgg11,
+#         2: torch_models.vgg11_bn,
+#         3: torch_models.vgg13,
+#         4: torch_models.vgg13_bn,
+#         5: torch_models.vgg16,
+#         6: torch_models.vgg16_bn,
+#         7: torch_models.vgg19,
+#         8: torch_models.vgg19_bn,
+#         9: torch_models.resnet18,
+#         10: torch_models.resnet34,
+#         11: torch_models.resnet50,
+#         12: torch_models.resnet101,
+#         13: torch_models.resnet152,
+#         14: torch_models.resnext50_32x4d,
+#         15: torch_models.resnext101_32x8d,
+#         16: torch_models.wide_resnet50_2,
+#         17: torch_models.wide_resnet101_2,
+#         18: torch_models.squeezenet1_0,
+#         19: torch_models.squeezenet1_1,
+#         20: torch_models.densenet121,
+#         21: torch_models.densenet161,
+#         22: torch_models.densenet169,
+#         23: torch_models.densenet201,
+#         24: torch_models.inception_v3,
+#         25: torch_models.googlenet,
+#         26: torch_models.shufflenet_v2_x0_5,
+#         27: torch_models.shufflenet_v2_x1_0,
+#         28: torch_models.shufflenet_v2_x1_5,
+#         29: torch_models.shufflenet_v2_x2_0,
+#         30: torch_models.mobilenet_v2,
+#         31: torch_models.mnasnet0_5,
+#         32: torch_models.mnasnet0_75,
+#         33: torch_models.mnasnet1_0,
+#         34: torch_models.mnasnet1_3,
+#     }

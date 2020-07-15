@@ -110,10 +110,10 @@ class ResNet(nn.Module):
         out = self.layer4(out)
         # 1x1 avg pool
         # out = F.avg_pool2d(input=out, kernel_size=4)
-        out = nn.AdaptiveAvgPool2d((1, 1))(out)
+        out = nn.AdaptiveAvgPool2d(output_size=(1, 1))(out)
         out = out.view(out.size()[0], -1)
         out = self.linear(out)
-        # For softmax activation in training, modify given III_train.py.
+        # For softmax activation in training, modify a function train() in III_train.py.
         # (As you know, valid/test do not need the softmax activation.)
         return out
 
@@ -140,6 +140,10 @@ def ResNet152():
 
 def test():
     model = ResNet18()
+    # print('model.state_dict ...')
+    # for param_tensor in model.state_dict():
+    #     print(param_tensor, '\t', model.state_dict()[param_tensor].size())
+
     y = model(torch.randn(1, 3, 32, 32))
     print(y.size())
 
