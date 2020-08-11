@@ -21,7 +21,7 @@ Under Construction! Don't fork yet please!!!
 * `PyTorch >= 1.4`
 * `torchvision`
 * `tensorboard`
-For evaluation,
+* For evaluation,
 	- `scikit-learn >= 0.23.2` 
 	- `matplotlib`	
 
