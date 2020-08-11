@@ -125,14 +125,13 @@ python ./2_test.py --dataset=your_own_splitted_dataset_1 --model_index=36 --obje
 
 ## Quick Features of This Code
 1. Using `1_train.py`,
-![]()
-![]()
+![](README/1_1.png)
     - With `valid.csv` you can plot like this,
-    ![]()
+    ![](README/1_2.svg)
 
 2. Using `2_test.py`,
-![]()
-![]()
+![](README/2_1.svg)
+![](README/2_2.svg)
 
 ## Contribution
 If you find any bugs or have opinions for further improvements, please feel free to create a pull request. All contributions are welcome.
