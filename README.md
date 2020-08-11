@@ -21,17 +21,12 @@ Under Construction! Don't fork yet please!!!
 	- You can visually check the evaluation result with **confusion matrix**.
 
 ## Prerequisites
-- For training code:
-    * `Python 3.7`
-    * `PyTorch >= 1.4`
-    * `torchvision`
-    * `tensorboard`
-- For evaluation code:
-    * `Python 3.7`
-    * `PyTorch >= 1.4`
-    * `scikit-learn >= 0.23.2`
-    * `torchvision`
-    * `matplotlib`
+* `Python 3.7`
+* `PyTorch >= 1.4`
+* `torchvision`
+* `tensorboard`
+* `scikit-learn >= 0.23.2` 
+* `matplotlib`	
 
 
 ## How to use
