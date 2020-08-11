@@ -1,70 +1,146 @@
-# Imbalanced_Image_Classification_With_Complement_Cross_Entropy_Pytorch
-**[Yechan Kim](github.com/unique-chan), [Yoonkwan Lee](github.com/brightyoun), and [Moongu Jeon]()**
+# Imbalanced Image Classification with Complement Cross Entropy (Pytorch)
+**[Yechan Kim](github.com/unique-chan), [Yoonkwan Lee](github.com/brightyoun), and [Moongu Jeon](https://scholar.google.co.kr/citations?user=zfngGSkAAAAJ&hl=ko&oi=ao)**
 
-## Novelty
-- **암호화**된 대중교통 이용 데이터에서 어떻게 **관광객의 통행 기록**을 **추출**할 것인가?
-- 자세한 알고리즘은 [논문](https://doi.org/10.5626/KTCP.2020.26.8.349)을 참고하시기 바랍니다.
-- 저자
-  - 김예찬(yechankim@gm.gist.ac.kr), 지스트 전기전자컴퓨터공학부 
-  - 김철수(kimcs@jejunu.ac.kr), 제주대학교 전산통계학과
-  - 김성백(sbkim@jejunu.ac.kr), 제주대학교 컴퓨터교육과
+[Cite this Paper]()
+
+## This repository contains:
+- Training code for image classification
+	- You can use your **own custom datasets**.
+	- You can use your **own CNN models**.
+	- You can try to use various **loss functions** given.
+		- `CCE`: Complement Cross Entropy (**proposed loss function**)
+		- `ERM`: Cross Entropy
+		- `COT`: Cross Entropy and Complement Entropy 
+		- `FL`: Focal Loss
+	- You can visually check the training process with **tensorboard**.
+		- **accuracy** and **loss** for training and validation
+- Evaluation code for image classification
+	- You can test **the trained model** after training.
+	- You can visually check the evaluation result with **confusion matrix**.
 
 ## Prerequisites
-- Python 3.7.4
-- Pandas 0.25.1
+- For training code:
+    * `Python 3.7`
+    * `PyTorch >= 1.4`
+    * `torchvision`
+    * `tensorboard`
+- For evaluation code:
+    * `Python 3.7`
+    * `PyTorch >= 1.4`
+    * `scikit-learn >= 0.23.2`
+    * `torchvision`
+    * `matplotlib`
 
-## Cautions
-- 이 알고리즘은 [제주 빅데이터 센터](https://bc.jejudatahub.net/main)에서 제공하는 제주 대중교통 버스 교통카드 빅데이터(tb_bus_user_usage, 버스 이용 데이터)에 최적화되어 있습니다.
-- 만약 제주 빅데이터 센터에서 제공하는 데이터 파일의 스키마가 변경될 경우, # 컬럼 상수 하단의 코드를 수정하면 됩니다. 예로, 'user_id'라는 필드가 'bus_user_id'로 변경된 경우, 
-~~~
-user_id = 'bus_user_id'
-~~~
 
 ## How to use
-- 임의로 디렉토리를 생성한 뒤, 다음과 같이 1개 이상의 제주 대중교통 버스 교통카드 데이터 파일(확장자: csv)을 배치합니다.
-- 참고로, 제주 빅데이터 센터는 일일단위로 버스 교통카드 이용 데이터 파일을 제공합니다. 
-- 하단과 같이 파일에 이름을 부여하면 직관적일 것입니다. 다만, 파일 이름은 중복만 되지 않는다면, 분석에 어떠한 상관도 없습니다.
-- 단, 논문에 제시한 알고리즘 근거에 따라 1년을 초과하는 기간 범위의 데이터 파일들의 배치는 잘못 분석될 가능성이 높습니다.
+1. Before training, you first put your own dataset(s) under the folder, **a_datasets**. The directory structure should be as follows.
 ~~~
-tb_bus_user_usage_190601.csv
-tb_bus_user_usage_190602.csv
-tb_bus_user_usage_190603.csv
-... 중략 ...
+|—— 📁 a_datasets 
+	|—— 📁 your_own_splitted_dataset_1
+		|—— 📁 train
+			|—— 📁 class_1
+				|—— 🖼️ 1.jpg
+				|—— ...
+			|—— 📁 class_2 
+				|—— 📁 ...
+		|—— 📁 valid
+			|—— 📁 class_1
+			|—— 📁 ... 
+		|—— 📁 test
+			|—— 📁 class_1
+			|—— 📁 ... 
+	|—— 📁 your_own_splitted_dataset_2
+	|—— 📁 ...
 ~~~
-- path 변수에 디렉토리의 주소를 삽입합니다.
+1. (Optional) If your own dataset are not splitted into 3 subdirectories (train / valid / test), you can use `data_split.py`, where you should set train / valid / test **split ratio**. Please first put your own dataset under the folder, **c_original_dataset** as follows. The splitted dataset will be stored in **a_datasets**.
 ~~~
-# 예로, d 드라이브 밑 tb_bus_user_usage 디렉토리에 분석할 데이터 파일(을 저장한 경우,
-### (1) 이하 전처리
-path = 'd:/tb_bus_user_usage'
+|—— 📁 c_original_dataset
+	|—— 📁 your_own_dataset
+		|—— 🖼️ 1.jpg
+        |—— 🖼️ 2.jpg
+        |—— ...
 ~~~
-- 알고리즘의 세부적인 사항을 필요하면 수정합니다.
+1. Run **1_train.py** for training. You can use **3_run.sh** for setting various training plans. The below is an example.
 ~~~
-# 예로, 연속으로 15일 미만이 아니라, 10일 미만인 버스 이용자를 필터링하고자 할 경우,
-... 중략 ...
-# 관광객 연속 체류 기간 ('day'의 변수 값(int형)만 수정하면 됩니다! 15 -> 10)
-day = 10 
-... 중략 ...
-### (2) 이하 추출 ①
-... 중략 ...
-U = list(date_cnt[date_cnt[base_date] < day][user_id].unique())
-... 중략 ...
-### (3) 이하 추출 ②
-... 중략 ...
-U2 = list(M2_2[M2_2['diff'] < '%d days' % day][user_id].unique()) 
-... 중략 ...
+python ./1_train.py --dataset=your_own_splitted_dataset_1 --model_index=36 --objective='ERM' --warmup;
+python ./1_train.py --dataset=your_own_splitted_dataset_2 --model_index=35 --objective='CCE' --warmup --ccegamma=1;
+python ./1_train.py --dataset=your_own_splitted_dataset_3 --model_index=38 --objective='FL' --warmup;
+python ./1_train.py --dataset=your_own_splitted_dataset_4 --model_index=37 --objective='COT' --warmup;
 ~~~
-- 알고리즘을 실행합니다. 알고리즘은 **관광객으로 추정된 버스 이용자의 USER_ID를 추출**하여 **U3 변수**에 저장합니다.
-- U3 변수에 담긴 각 USER_ID에 대응하는 버스 이용자의 통행 기록을 분석하면 됩니다.
+	- Arguments for run 1_train.py:
+		| Argument | Type | Help | Default | Remarks |
+        |----------|------|------|---------|---------|
+        |model_index|int|||You can add and use your own model by modifying **get_model.py**.|
+        |dataset|str|select the dataset in a_datasets|| |
+        |objective|str|loss function|'ERM'|You can add and use your own loss function by modifying **criterion.py.**|
+        |lr|float|initial learning rate|0.1||
+        |epochs|int||200||
+        |batchsize|int||128||
+        |height|int|image height|32||
+        |width|int|image width|32||
+        |lrstep|list|manual learning rate decay steps|[60, 60, 40, 40]|recommended|
+        |warmup||if you want to use linear learning rate warm up for first 5 epochs, use ``--warmup``.|None|recommended|
+        |ccegamma|int|gamma value for ``CCE``.|5|||
 
-## Notice
-- 본 소스코드를 이용하여 수행한 연구 결과를 논문이나 보고서 등의 형태의 산출물로 게재할 경우, 그 산출물에 하단 레퍼런스를 반드시 인용해야 합니다.
-- 인용 포맷은 게재하는 논문이나 보고서의 규정을 준수하시면 됩니다.
->[국문 예시]
-김예찬, 김철수, 김성백, "암호화된 대중교통 교통카드 빅데이터에서의 관광객 O-D 통행패턴 추출 알고리즘: 관광 도시, 제주에의 적용," 정보과학회 컴퓨팅의 실제 논문지, Vol. 26, No. 8, pp. 349-361, 2020.
+	- All training results such as trained parameters file(`.pth`), log files(`.csv` ) will be stored as the following structure.
+~~~
+|—— 📁 logs 
+	|—— 📁 ResNet34 (Used CNN Name)
+		|—— 📁 cifar-100-balanced (Used Dataset Name)
+			|—— 📁 ERM (Used Loss Function Name)
+				|—— 📁 2020-08-01-03-30-26 (Start Time of Training)
+					|—— 60.87.pth (Trained Parameters File)
+                    |—— train.csv (Log for Training)
+                    |—— valid.csv (Log for Validation)
+                    |—— event files for tensorboard summary
+	|—— 📁 ...
+~~~
 
->[영문 예시]
-Yechan Kim, Chul-Soo Kim, and Seong-Baeg Kim, "An Algorithm for Extracting Tourists’ O-D Patterns Using Encrypted Smart Card Data of Public Transportation: Application to Tourist City, Jeju," KIISE Transactions on Computing Practices, Vol. 26, No. 8, pp. 349-361, 2020. (in Korean)
+        - In `60.87.pth`, 60.87 represents the maximum of prediction accuracy on validation.
+        - `train.csv` and `valid.csv` include **loss, acc, top5acc, lr (learning rate)** per each epoch during training. 
+        - You can use these files later for visualization such as plotting validation accuracy per each epoch.
+1. Run **2_test.py** for evaluation. You can use **3_run.sh** for setting various testing plans. The below is an example.
+~~~
+python ./2_test.py --dataset=your_own_splitted_dataset_1 --model_index=36 --objective='ERM' --datetime='2020-08-10-22-06-19';
+~~~
+	- Arguments for run 2_test.py:
+		| Argument | Type | Help |Remarks |
+        |----------|------|------|---------|
+        |model_index|int|select the model you used||
+        |dataset|str|select the dataset you used||
+        |objective|str|loss function you used||
+        |datetime|str|start time of your training with given condition (`model_index`, `dataset`, and `objective`).|formatting should be like this: `YYYY-MM-DD-HH-MM-SS`|
+	- All evaluation result, confusion matrix figure(`.svg`) will be stored as the following structure.
+~~~
+|—— 📁 logs 
+	|—— 📁 ResNet34 (Used CNN Name)
+		|—— 📁 cifar-100-balanced (Used Dataset Name)
+			|—— 📁 ERM (Used Loss Function Name)
+				|—— 📁 2020-08-01-03-30-26 (Start Time of Training)
+					|—— ...
+                    |—— confusion_matrix.svg
+	|—— 📁 ...
+~~~
 
-## Acknowledgement
-- 본 연구는 과학기술정보통신부 및 정보통신기술진흥센터의 SW중심대학 지원사업(No. 2018-0-01863)으로 수행되었습니다.
-- 본 연구를 위해 제주 지역 교통카드 빅데이터를 제공한 JTP-제주특별자치도 빅데이터 센터에 감사의 말씀을 전합니다.
+
+## Quick Features of This Code
+1. Using `1_train.py`,
+![]()
+![]()
+    - With `valid.csv` you can plot like this,
+    ![]()
+
+2. Using `2_test.py`,
+![]()
+![]()
+
+## Contribution
+If you find any bugs or have opinions for further improvements, please feel free to create a pull request. All contributions are welcome.
+
+## Reference
+1. Hao-Yun Chen, Pei-Hsin Wang, Chun-Hao Liu, Shih-Chieh Chang, Jia-Yu  Pan,  Yu-Ting  Chen,  Wei  Wei,  and  Da-Cheng  Juan.   Complementobjective training.arXiv preprint arXiv:1903.01182, 2019.
+2. Tsung-Yi Lin, Priya Goyal, Ross Girshick, Kaiming He, and Piotr Doll ́ar.Focal  loss  for  dense  object  detection.InProceedings  of  the  IEEEinternational conference on computer vision, pages 2980–2988, 2017.
+3. Tong He, Zhi Zhang, Hang Zhang, Zhongyue Zhang, Junyuan Xie, andMu Li.  Bag of tricks for image classification with convolutional neuralnetworks.  InProceedings of the IEEE Conference on Computer Visionand Pattern Recognition, pages 558–567, 2019.
+4. https://github.com/calmisential/Basic_CNNs_TensorFlow2
+5. https://github.com/Hsuxu/Loss_ToolBox-PyTorch
+6. https://github.com/unique-chan/pytorch-cifar100
