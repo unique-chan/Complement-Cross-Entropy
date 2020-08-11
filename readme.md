@@ -52,6 +52,7 @@
 	|—— 📁 your_own_splitted_dataset_2
 	|—— 📁 ...
 ~~~
+
 1. (Optional) If your own dataset are not splitted into 3 subdirectories (train / valid / test), you can use `data_split.py`, where you should set train / valid / test **split ratio**. Please first put your own dataset under the folder, **c_original_dataset** as follows. The splitted dataset will be stored in **a_datasets**.
 ~~~
 |—— 📁 c_original_dataset
@@ -60,6 +61,7 @@
         |—— 🖼️ 2.jpg
         |—— ...
 ~~~
+
 1. Run **1_train.py** for training. You can use **3_run.sh** for setting various training plans. The below is an example.
 ~~~
 python ./1_train.py --dataset=your_own_splitted_dataset_1 --model_index=36 --objective='ERM' --warmup;
@@ -67,7 +69,8 @@ python ./1_train.py --dataset=your_own_splitted_dataset_2 --model_index=35 --obj
 python ./1_train.py --dataset=your_own_splitted_dataset_3 --model_index=38 --objective='FL' --warmup;
 python ./1_train.py --dataset=your_own_splitted_dataset_4 --model_index=37 --objective='COT' --warmup;
 ~~~
-	- Arguments for run 1_train.py:
+
+- Arguments for run 1_train.py:
 		| Argument | Type | Help | Default | Remarks |
         |----------|------|------|---------|---------|
         |model_index|int|||You can add and use your own model by modifying **get_model.py**.|
@@ -82,7 +85,8 @@ python ./1_train.py --dataset=your_own_splitted_dataset_4 --model_index=37 --obj
         |warmup||if you want to use linear learning rate warm up for first 5 epochs, use ``--warmup``.|None|recommended|
         |ccegamma|int|gamma value for ``CCE``.|5|||
 
-	- All training results such as trained parameters file(`.pth`), log files(`.csv` ) will be stored as the following structure.
+- All training results such as trained parameters file(`.pth`), log files(`.csv` ) will be stored as the following structure.
+	
 ~~~
 |—— 📁 logs 
 	|—— 📁 ResNet34 (Used CNN Name)
@@ -96,21 +100,26 @@ python ./1_train.py --dataset=your_own_splitted_dataset_4 --model_index=37 --obj
 	|—— 📁 ...
 ~~~
 
-        - In `60.87.pth`, 60.87 represents the maximum of prediction accuracy on validation.
-        - `train.csv` and `valid.csv` include **loss, acc, top5acc, lr (learning rate)** per each epoch during training. 
-        - You can use these files later for visualization such as plotting validation accuracy per each epoch.
+- In `60.87.pth`, 60.87 represents the maximum of prediction accuracy on validation.
+- `train.csv` and `valid.csv` include **loss, acc, top5acc, lr (learning rate)** per each epoch during training. 
+- You can use these files later for visualization such as plotting validation accuracy per each epoch.
+	
 1. Run **2_test.py** for evaluation. You can use **3_run.sh** for setting various testing plans. The below is an example.
 ~~~
 python ./2_test.py --dataset=your_own_splitted_dataset_1 --model_index=36 --objective='ERM' --datetime='2020-08-10-22-06-19';
 ~~~
-	- Arguments for run 2_test.py:
-		| Argument | Type | Help |Remarks |
-        |----------|------|------|---------|
-        |model_index|int|select the model you used||
-        |dataset|str|select the dataset you used||
-        |objective|str|loss function you used||
-        |datetime|str|start time of your training with given condition (`model_index`, `dataset`, and `objective`).|formatting should be like this: `YYYY-MM-DD-HH-MM-SS`|
-	- All evaluation result, confusion matrix figure(`.svg`) will be stored as the following structure.
+
+- Arguments for run 2_test.py:
+
+| Argument | Type | Help |Remarks |
+|----------|------|------|---------|
+|model_index|int|select the model you used||
+|dataset|str|select the dataset you used||
+|objective|str|loss function you used||
+|datetime|str|start time of your training with given condition (`model_index`, `dataset`, and `objective`).|formatting should be like this: `YYYY-MM-DD-HH-MM-SS`|
+
+- All evaluation result, confusion matrix figure(`.svg`) will be stored as the following structure.
+	
 ~~~
 |—— 📁 logs 
 	|—— 📁 ResNet34 (Used CNN Name)
@@ -125,13 +134,21 @@ python ./2_test.py --dataset=your_own_splitted_dataset_1 --model_index=36 --obje
 
 ## Quick Features of This Code
 1. Using `1_train.py`,
-![](README/1_1.png)
-    - With `valid.csv` you can plot like this,
-    ![](README/1_2.svg)
+
+<center>
+	<img src="README/1_1.png" alt="" width="600"/>
+</center>
+
+- With `valid.csv` you can plot like this,
+
+<center>
+	<img src="README/1_2.svg" alt="" width="450"/>
+</center>
 
 2. Using `2_test.py`,
-![](README/2_1.svg)
-![](README/2_2.svg)
+<center>
+	<img src="README/2_1.svg" alt="" width="450"/>
+</center>
 
 ## Contribution
 If you find any bugs or have opinions for further improvements, please feel free to create a pull request. All contributions are welcome.
