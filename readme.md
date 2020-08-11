@@ -133,19 +133,23 @@ python ./2_test.py --dataset=your_own_splitted_dataset_1 --model_index=36 --obje
 
 
 ## Quick Features of This Code
-1. Using `1_train.py`,
+1. During training with `1_train.py`, tensorboard shows the progress of training.
+
+~~~
+tensorboard --logdir=logs
+~~~
 
 <center>
 	<img src="README/1_1.png" alt="" width="900"/>
 </center>
 
-- With `valid.csv` you can plot like this,
+2. After training with `1_train.py`, you can plot the prediction accuracy figure using generated `valid.csv`. (The below is plotted with matplotlib.)
 
 <center>
 	<img src="README/1_2.svg" alt="" width="450"/>
 </center>
 
-2. Using `2_test.py`,
+2. With `2_test.py`, you can evaluate the trained model. And it also generates the confusion matrix for comparison with other models.
 <center>
 	<img src="README/2_1.svg" alt="" width="450"/>
 </center>
