@@ -8,25 +8,22 @@ Under Construction! Don't fork yet please!!!
 ## This repository contains:
 - Training code for image classification
 	- You can use your **own custom datasets**.
-	- You can use your **own CNN models**.
 	- You can try to use various **loss functions** given.
 		- `CCE`: Complement Cross Entropy (**proposed loss function**)
 		- `ERM`: Cross Entropy
 		- `COT`: Cross Entropy and Complement Entropy (for Complement Objective Training)
 		- `FL`: Focal Loss
-	- You can visually check the training process with **tensorboard**.
-		- **accuracy** and **loss** for training and validation
 - Evaluation code for image classification
-	- You can test **the trained model** after training.
-	- You can visually check the evaluation result with **confusion matrix**.
+	- You can test **the trained model** and check the **confusion matrix** for comparison with other models.
 
 ## Prerequisites
 * `Python 3.7`
 * `PyTorch >= 1.4`
 * `torchvision`
 * `tensorboard`
-* `scikit-learn >= 0.23.2` 
-* `matplotlib`	
+For evaluation,
+	- `scikit-learn >= 0.23.2` 
+	- `matplotlib`	
 
 
 ## How to use
