@@ -71,19 +71,20 @@ python ./1_train.py --dataset=your_own_splitted_dataset_4 --model_index=37 --obj
 ~~~
 
 - Arguments for run 1_train.py:
-		| Argument | Type | Help | Default | Remarks |
-        |----------|------|------|---------|---------|
-        |model_index|int|||You can add and use your own model by modifying **get_model.py**.|
-        |dataset|str|select the dataset in a_datasets|| |
-        |objective|str|loss function|'ERM'|You can add and use your own loss function by modifying **criterion.py.**|
-        |lr|float|initial learning rate|0.1||
-        |epochs|int||200||
-        |batchsize|int||128||
-        |height|int|image height|32||
-        |width|int|image width|32||
-        |lrstep|list|manual learning rate decay steps|[60, 60, 40, 40]|recommended|
-        |warmup||if you want to use linear learning rate warm up for first 5 epochs, use ``--warmup``.|None|recommended|
-        |ccegamma|int|gamma value for ``CCE``.|5|||
+
+| Argument | Type | Help | Default | Remarks |
+|----------|------|------|---------|---------|
+|model_index|int|||You can add and use your own model by modifying **get_model.py**.|
+|dataset|str|select the dataset in a_datasets|| |
+|objective|str|loss function|'ERM'|You can add and use your own loss function by modifying **criterion.py.**|
+|lr|float|initial learning rate|0.1||
+|epochs|int||200||
+|batchsize|int||128||
+|height|int|image height|32||
+|width|int|image width|32||
+|lrstep|list|manual learning rate decay steps|[60, 60, 40, 40]|recommended|
+|warmup||if you want to use linear learning rate warm up for first 5 epochs, use ``--warmup``.|None|recommended|
+|ccegamma|int|gamma value for ``CCE``.|5|||
 
 - All training results such as trained parameters file(`.pth`), log files(`.csv` ) will be stored as the following structure.
 	
