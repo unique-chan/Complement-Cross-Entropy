@@ -12,7 +12,7 @@ Under Construction! Don't fork yet please!!!
 	- You can try to use various **loss functions** given.
 		- `CCE`: Complement Cross Entropy (**proposed loss function**)
 		- `ERM`: Cross Entropy
-		- `COT`: Cross Entropy and Complement Entropy 
+		- `COT`: Cross Entropy and Complement Entropy (for Complement Objective Training)
 		- `FL`: Focal Loss
 	- You can visually check the training process with **tensorboard**.
 		- **accuracy** and **loss** for training and validation
