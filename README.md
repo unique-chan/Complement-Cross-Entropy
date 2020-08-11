@@ -52,8 +52,8 @@ Under Construction! Don't fork yet please!!!
 |—— 📁 c_original_dataset
 	|—— 📁 your_own_dataset
 		|—— 🖼️ 1.jpg
-        |—— 🖼️ 2.jpg
-        |—— ...
+        	|—— 🖼️ 2.jpg
+        	|—— ...
 ~~~
 
 1. Run **1_train.py** for training. You can use **3_run.sh** for setting various training plans. The below is an example.
