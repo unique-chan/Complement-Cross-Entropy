@@ -136,7 +136,7 @@ python ./2_test.py --dataset=your_own_splitted_dataset_1 --model_index=36 --obje
 1. Using `1_train.py`,
 
 <center>
-	<img src="README/1_1.png" alt="" width="600"/>
+	<img src="README/1_1.png" alt="" width="900"/>
 </center>
 
 - With `valid.csv` you can plot like this,
