@@ -89,9 +89,9 @@ python ./1_train.py --dataset=your_own_splitted_dataset_4 --model_index=37 --obj
 			|—— 📁 ERM (Used Loss Function Name)
 				|—— 📁 2020-08-01-03-30-26 (Start Time of Training)
 					|—— 60.87.pth (Trained Parameters File)
-                    |—— train.csv (Log for Training)
-                    |—— valid.csv (Log for Validation)
-                    |—— event files for tensorboard summary
+                    			|—— train.csv (Log for Training)
+                   			|—— valid.csv (Log for Validation)
+                   			|—— event files for tensorboard summary
 	|—— 📁 ...
 ~~~
 
@@ -122,7 +122,7 @@ python ./2_test.py --dataset=your_own_splitted_dataset_1 --model_index=36 --obje
 			|—— 📁 ERM (Used Loss Function Name)
 				|—— 📁 2020-08-01-03-30-26 (Start Time of Training)
 					|—— ...
-                    |—— confusion_matrix.svg
+                    			|—— confusion_matrix.svg
 	|—— 📁 ...
 ~~~
 
