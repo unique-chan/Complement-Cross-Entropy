@@ -159,8 +159,8 @@ def valid(epoch):
             'loss': valid_loss,
         }
 
-        # 감마 얘기 추가해야 .
-        torch.save(state, log_dir + '/' + str(top1_acc.item()) + '.pth')
+        # torch.save(state, log_dir + '/' + str(top1_acc.item()) + '.pth')
+        torch.save(state, log_dir + '/' + 'model' + '.pth')
         best_top1_valid_acc = top1_acc
 
     valid_loss /= len(valid_loader)

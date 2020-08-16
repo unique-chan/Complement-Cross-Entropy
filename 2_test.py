@@ -139,7 +139,8 @@ if __name__ == '__main__':
     model = MODEL(num_classes=NUM_CLASSES)
 
     # 4. Initialize the CNN model with given checkpoint.
-    checkpoint = torch.load(MODEL_CHECKPOINT_DIR + '/' + get_max_pth_file())
+    # checkpoint = torch.load(MODEL_CHECKPOINT_DIR + '/' + get_max_pth_file())
+    checkpoint = torch.load(MODEL_CHECKPOINT_DIR + '/' + 'model.pth')
     checkpoint = modify_checkpoint_keys(checkpoint)
     model.load_state_dict(checkpoint['model_state_dict'])
 
