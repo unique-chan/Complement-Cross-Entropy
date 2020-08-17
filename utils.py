@@ -199,8 +199,10 @@ def add_arguments_for_train(PARSER):
                         help='height (default: 32)')
     PARSER.add_argument('--width', default=32, type=int,
                         help='width (default: 32)')
-    PARSER.add_argument('--lrstep', default=[60, 60, 40, 40], type=list,
-                        help='learning rate step decay milestones (default: [60, 60, 40, 40])')
+    # PARSER.add_argument('--lrstep', default=[60, 60, 40, 40], type=list,
+    #                     help='learning rate step decay milestones (default: [60, 60, 40, 40])')
+    PARSER.add_argument('--lrstep', default=[60, 120, 160, 200], type=list,
+                        help='learning rate step decay milestones (default: [60, 120, 160, 200])')
     PARSER.add_argument('--lrstepgamma', default=0.2, type=float,
                         help='learning rate step decay gamma (default: 0.2)')
     PARSER.add_argument('--warmup', action='store_true',
