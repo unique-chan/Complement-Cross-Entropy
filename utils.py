@@ -207,7 +207,7 @@ def add_arguments_for_train(PARSER):
                         help='learning rate step decay gamma (default: 0.2)')
     PARSER.add_argument('--warmup', action='store_true',
                         help='initial learning rate warm up for first 5 epochs')
-    PARSER.add_argument('--ccegamma', default=5, type=int,
+    PARSER.add_argument('--ccegamma', default=-1, type=int,
                         help='gamma for CCE')
     PARSER.add_argument('--delay', default=0, type=int,
                         help='postpone training for given seconds (default: 0)')
