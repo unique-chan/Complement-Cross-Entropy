@@ -77,14 +77,13 @@ python ./1_train.py --dataset=your_own_splitted_dataset_4 --model_index=37 --obj
 		|—— 📁 cifar-100-balanced (Used Dataset Name)
 			|—— 📁 ERM (Used Loss Function Name)
 				|—— 📁 2020-08-01-03-30-26 (Start Time of Training)
-					|—— 60.87.pth (Trained Parameters File)
+					|—— model.pth (Trained Parameters File)
                     			|—— train.csv (Log for Training)
                    			|—— valid.csv (Log for Validation)
                    			|—— event files for tensorboard summary
 	|—— 📁 ...
 ~~~
 
-- In `60.87.pth`, 60.87 represents the maximum of prediction accuracy on validation.
 - `train.csv` and `valid.csv` include **loss, acc, top5acc, lr (learning rate)** per each epoch during training. 
 - You can use these files later for visualization such as plotting validation accuracy per each epoch.
 	
