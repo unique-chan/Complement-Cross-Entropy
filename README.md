@@ -10,7 +10,7 @@
 		- `CCE`: Minimize complement cross cntropy (**proposed loss function**)
 		- `ERM`: Minimize cross entropy (standard)
 		- `COT`: Minimize cross entropy and maximize complement entropy [1]
-		- `FL`: Minimize focal loss
+		- `FL`: Minimize focal loss [2]
 - Evaluation code for image classification
 	- You can test **the trained model** and check the **confusion matrix** for comparison with other models.
 
