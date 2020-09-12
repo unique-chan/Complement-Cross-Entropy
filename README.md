@@ -7,10 +7,10 @@
 - Training code for image classification
 	- You can use your **own custom datasets**.
 	- You can choose **training objective** you want.
-		- `CCE`: Minimize Complement Cross Entropy (**proposed loss function**)
-		- `ERM`: Minimize Cross Entropy
-		- `COT`: Minimize Cross Entropy and Maximize Complement Entropy (Complement Objective Training)
-		- `FL`: Minimize Focal Loss
+		- `CCE`: Minimize complement cross cntropy (**proposed loss function**)
+		- `ERM`: Minimize cross entropy (standard)
+		- `COT`: Minimize cross entropy and maximize complement entropy [1]
+		- `FL`: Minimize focal loss
 - Evaluation code for image classification
 	- You can test **the trained model** and check the **confusion matrix** for comparison with other models.
 
