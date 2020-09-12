@@ -1,9 +1,7 @@
 # Imbalanced Image Classification with Complement Cross Entropy (Pytorch)
 **[Yechan Kim](https://github.com/unique-chan), [Younkwan Lee](https://github.com/brightyoun), and [Moongu Jeon](https://scholar.google.co.kr/citations?user=zfngGSkAAAAJ&hl=ko&oi=ao)**
 
-Under Construction! Don't fork yet please!!!
-
-[Cite this Paper]()
+[Cite this Paper](https://arxiv.org/abs/2009.02189)
 
 ## This repository contains:
 - Training code for image classification
@@ -47,7 +45,7 @@ Under Construction! Don't fork yet please!!!
 	|—— 📁 ...
 ~~~
 
-1. Run **1_train.py** for training. You can use **3_run.sh** for setting various training plans. The below is an example.
+2. Run **1_train.py** for training. You can use **3_run.sh** for setting various training plans. The below is an example.
 ~~~
 python ./1_train.py --dataset=your_own_splitted_dataset_1 --model_index=36 --objective='ERM' --warmup;
 python ./1_train.py --dataset=your_own_splitted_dataset_2 --model_index=35 --objective='CCE' --warmup --ccegamma=1;
@@ -90,7 +88,7 @@ python ./1_train.py --dataset=your_own_splitted_dataset_4 --model_index=37 --obj
 - `train.csv` and `valid.csv` include **loss, acc, top5acc, lr (learning rate)** per each epoch during training. 
 - You can use these files later for visualization such as plotting validation accuracy per each epoch.
 	
-1. Run **2_test.py** for evaluation. You can use **3_run.sh** for setting various testing plans. The below is an example.
+3. Run **2_test.py** for evaluation. You can use **3_run.sh** for setting various testing plans. The below is an example.
 ~~~
 python ./2_test.py --dataset=your_own_splitted_dataset_1 --model_index=36 --objective='ERM' --datetime='2020-08-10-22-06-19';
 ~~~
