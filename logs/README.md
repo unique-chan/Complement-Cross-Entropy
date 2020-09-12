@@ -1,4 +1,4 @@
-- All training results such as trained parameters file(`.pth`), log files(`.csv` ) will be stored as the following structure.
+All training results such as trained parameters file(`.pth`), log files(`.csv` ) will be stored as the following structure.
 	
 ~~~
 |—— 📁 logs 
