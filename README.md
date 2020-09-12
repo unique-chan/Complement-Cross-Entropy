@@ -132,7 +132,7 @@ tensorboard --logdir=logs
 	<img src="README/1_2.svg" alt="" width="450"/>
 </center>
 
-2. With `2_test.py`, you can evaluate the trained model. And it also generates the confusion matrix for comparison with other models.
+3. With `2_test.py`, you can evaluate the trained model. And it also generates the confusion matrix for comparison with other models.
 <center>
 	<img src="README/2_1.svg" alt="" width="450"/>
 </center>
