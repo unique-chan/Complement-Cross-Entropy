@@ -47,15 +47,6 @@ Under Construction! Don't fork yet please!!!
 	|—— 📁 ...
 ~~~
 
-1. (Optional) If your own dataset are not splitted into 3 subdirectories (train / valid / test), you can use `data_split.py`, where you should set train / valid / test **split ratio**. Please first put your own dataset under the folder, **c_original_dataset** as follows. The splitted dataset will be stored in **a_datasets**.
-~~~
-|—— 📁 c_original_dataset
-	|—— 📁 your_own_dataset
-		|—— 🖼️ 1.jpg
-        	|—— 🖼️ 2.jpg
-        	|—— ...
-~~~
-
 1. Run **1_train.py** for training. You can use **3_run.sh** for setting various training plans. The below is an example.
 ~~~
 python ./1_train.py --dataset=your_own_splitted_dataset_1 --model_index=36 --objective='ERM' --warmup;
@@ -78,7 +69,7 @@ python ./1_train.py --dataset=your_own_splitted_dataset_4 --model_index=37 --obj
 |width|int|image width|32||
 |lrstep|list|manual learning rate decay steps|[60, 60, 40, 40]|recommended|
 |warmup||if you want to use linear learning rate warm up for first 5 epochs, use ``--warmup``.|None|recommended|
-|ccegamma|int|gamma value for ``CCE``.|5|||
+|ccegamma|int|gamma value for ``CCE``.|-1|||
 
 - All training results such as trained parameters file(`.pth`), log files(`.csv` ) will be stored as the following structure.
 	
