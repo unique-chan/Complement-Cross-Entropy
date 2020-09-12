@@ -6,11 +6,11 @@
 ## This repository contains:
 - Training code for image classification
 	- You can use your **own custom datasets**.
-	- You can try to use various **loss functions** given.
-		- `CCE`: Complement Cross Entropy (**proposed loss function**)
-		- `ERM`: Cross Entropy
-		- `COT`: Cross Entropy and Complement Entropy (for Complement Objective Training)
-		- `FL`: Focal Loss
+	- You can choose **training objective** you want.
+		- `CCE`: Minimize Complement Cross Entropy (**proposed loss function**)
+		- `ERM`: Minimize Cross Entropy
+		- `COT`: Minimize Cross Entropy and Maximize Complement Entropy (Complement Objective Training)
+		- `FL`: Minimize Focal Loss
 - Evaluation code for image classification
 	- You can test **the trained model** and check the **confusion matrix** for comparison with other models.
 
