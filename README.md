@@ -141,9 +141,9 @@ tensorboard --logdir=logs
 If you find any bugs or have opinions for further improvements, please feel free to create a pull request. All contributions are welcome.
 
 ## Reference
-1. Hao-Yun Chen, Pei-Hsin Wang, Chun-Hao Liu, Shih-Chieh Chang, Jia-Yu  Pan,  Yu-Ting  Chen,  Wei  Wei,  and  Da-Cheng  Juan.   Complementobjective training.arXiv preprint arXiv:1903.01182, 2019.
-2. Tsung-Yi Lin, Priya Goyal, Ross Girshick, Kaiming He, and Piotr Doll ́ar.Focal  loss  for  dense  object  detection.InProceedings  of  the  IEEEinternational conference on computer vision, pages 2980–2988, 2017.
-3. Tong He, Zhi Zhang, Hang Zhang, Zhongyue Zhang, Junyuan Xie, andMu Li.  Bag of tricks for image classification with convolutional neuralnetworks.  InProceedings of the IEEE Conference on Computer Visionand Pattern Recognition, pages 558–567, 2019.
+1. Hao-Yun Chen, Pei-Hsin Wang, Chun-Hao Liu, Shih-Chieh Chang, Jia-Yu Pan, Yu-Ting Chen, Wei Wei, and Da-Cheng Juan. Complement objective training. arXiv preprint arXiv:1903.01182, 2019.
+2. Tsung-Yi Lin, Priya Goyal, Ross Girshick, Kaiming He, and Piotr Doll ́ar.Focal  loss  for  dense  object  detection. In Proceedings  of  the  IEEE international conference on computer vision, pages 2980–2988, 2017.
+3. Tong He, Zhi Zhang, Hang Zhang, Zhongyue Zhang, Junyuan Xie, andMu Li.  Bag of tricks for image classification with convolutional neuralnetworks.  InProceedings of the IEEE Conference on Computer Vision and Pattern Recognition, pages 558–567, 2019.
 4. https://github.com/calmisential/Basic_CNNs_TensorFlow2
 5. https://github.com/Hsuxu/Loss_ToolBox-PyTorch
 6. https://github.com/unique-chan/pytorch-cifar100
