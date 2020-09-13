@@ -8,4 +8,6 @@ Before training, you first put your own dataset(s) under the folder, **a_dataset
 				|—— ...
 			|—— 📁 class_2 
 				|—— 🖼️ ...
+		|—— 📁 valid
+		|—— 📁 test
 ~~~
