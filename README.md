@@ -22,7 +22,7 @@
 * For evaluation,
 	- `scikit-learn >= 0.23.2` 
 	- `matplotlib`	
-
+* This code is not tested on Windows. Ubuntu is strongly recommended to run this code.
 
 ## How to use
 1. Before training, you first put your own dataset(s) under the folder, **a_datasets**. The directory structure should be as follows.
