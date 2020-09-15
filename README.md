@@ -3,6 +3,8 @@
 
 [Cite this Paper](https://arxiv.org/abs/2009.02189)
 
+Last modified in **September 15, 2020**.
+
 ## This repository contains:
 - Training code for image classification
 	- You can use your **own custom datasets**.
