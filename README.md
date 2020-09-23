@@ -49,10 +49,10 @@ Last modified in **September 15, 2020**.
 
 2. Run **1_train.py** for training. You can use **3_run.sh** for setting various training plans. The below is an example.
 ~~~
-python ./1_train.py --dataset=your_own_splitted_dataset_1 --model_index=36 --objective='ERM' --warmup;
-python ./1_train.py --dataset=your_own_splitted_dataset_2 --model_index=35 --objective='CCE' --warmup --ccegamma=-1.5;
-python ./1_train.py --dataset=your_own_splitted_dataset_3 --model_index=38 --objective='FL' --warmup;
-python ./1_train.py --dataset=your_own_splitted_dataset_4 --model_index=37 --objective='COT' --warmup;
+python3 ./1_train.py --dataset=your_own_splitted_dataset_1 --model_index=36 --objective='ERM' --warmup;
+python3 ./1_train.py --dataset=your_own_splitted_dataset_2 --model_index=35 --objective='CCE' --warmup --ccegamma=-1.5;
+python3 ./1_train.py --dataset=your_own_splitted_dataset_3 --model_index=38 --objective='FL' --warmup;
+python3 ./1_train.py --dataset=your_own_splitted_dataset_4 --model_index=37 --objective='COT' --warmup;
 ~~~
 
 - Arguments for run 1_train.py:
