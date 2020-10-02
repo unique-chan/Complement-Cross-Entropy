@@ -3,7 +3,7 @@
 
 [Cite this Paper](https://arxiv.org/abs/2009.02189)
 
-Last modified in **September 15, 2020**.
+Last modified in **October 2, 2020 (MIT License added)**.
 
 ## This repository contains:
 - Training code for image classification
