@@ -1,6 +1,8 @@
 # Imbalanced Image Classification with Complement Cross Entropy (Pytorch)
 **[Yechan Kim](https://github.com/unique-chan), [Younkwan Lee](https://github.com/brightyoun), and [Moongu Jeon](https://scholar.google.co.kr/citations?user=zfngGSkAAAAJ&hl=ko&oi=ao)**
 
+**🚧 Under Construction: 👷 Currently, I am refactoring this code with an object-oriented concept to make it easier to understand.
+
 [Cite this Paper](https://arxiv.org/abs/2009.02189)
 
 Last modified in **October 2, 2020 (MIT License added)**.
