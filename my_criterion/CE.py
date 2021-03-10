@@ -23,5 +23,6 @@ class ComplementEntropy(nn.Module):
         output = Px * Px_log * y_zerohot.to(device=self.device)
         loss = torch.sum(output)
         loss /= float(batch_size)
-        loss /= float(self.C)
+        loss /= float(yHat.shape[1])
+        # loss /= float(self.C)
         return loss
