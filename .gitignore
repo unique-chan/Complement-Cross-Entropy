@@ -1,8 +1,0 @@
-/a_datasets/
-/logs/
-*.pyc
-*.sh
-__pycache__/
-*$py.class
-*.so
-.idea/
