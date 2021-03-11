@@ -114,11 +114,12 @@ class Trainer:
                 ### zero_grad
                 self.optimizer.zero_grad()
                 ### back_propagation
-                loss.backward(retain_graph=True)  # keep_graph=True
-                ### for COT
                 if self.loss_function == 'COT':
+                    loss.backward(retain_graph=True)  # keep_graph=True
                     complement_entropy = self.complement_entropy(dic['outputs'], dic['targets'])
                     complement_entropy.backward()
+                else:
+                    loss.backward()
                 ### gradient clipping
                 if self.clip > 0:
                     nn.utils.clip_grad_norm_(self.model.parameters(), self.clip)
