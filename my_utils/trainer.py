@@ -98,7 +98,10 @@ class Trainer:
             dic = {'outputs': outputs, 'targets': targets}
             if front_msg == 'Train':
                 # self.dic_adder(dic, cur_epoch)
-                loss = self.select_loss_function()(dic)
+                if self.loss_function == 'COT':
+                    loss = self.ERM(dic)
+                else:
+                    loss = self.select_loss_function()(dic)
             else:
                 loss = self.ERM(dic)
             # [if loss is nan...]
@@ -110,7 +113,11 @@ class Trainer:
                 ### zero_grad
                 self.optimizer.zero_grad()
                 ### back_propagation
-                loss.backward()
+                loss.backward(retain_graph=True)  # keep_graph=True
+                ### for COT
+                if self.loss_function == 'COT':
+                    complement_entropy = self.complement_entropy(dic['outputs'], dic['targets'])
+                    complement_entropy.backward()
                 ### gradient clipping
                 if self.clip > 0:
                     nn.utils.clip_grad_norm_(self.model.parameters(), self.clip)
