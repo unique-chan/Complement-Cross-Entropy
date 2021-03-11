@@ -69,8 +69,9 @@ class Trainer:
         return self.cross_entropy(dic['outputs'], dic['targets'])
 
     def CCE(self, dic):
+        print(self.gamma_for_cce)
         return self.cross_entropy(dic['outputs'], dic['targets']) \
-               - self.gamma_for_cce * self.complement_entropy(dic['outputs'], dic['targets'])
+               + self.gamma_for_cce * self.complement_entropy(dic['outputs'], dic['targets'])
 
     def FL(self, dic):
         pass
