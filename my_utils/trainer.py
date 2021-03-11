@@ -41,10 +41,6 @@ class Trainer:
         self.train_top5_acc_list, self.valid_top5_acc_list, self.test_top5_acc = [], [], None
         # gradient clipping constant
         self.clip = clip
-        # sigmoid linspace vector for lambda
-        a = 1
-        self.total_epochs = total_epochs
-        self.sigmoid_linspace = 1 / (1 + exp(- a * linspace(-10, 10, self.total_epochs)))
         # whether to show progress bar
         self.on_progress_bar = progress_bar
 
