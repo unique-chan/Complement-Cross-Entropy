@@ -2,7 +2,7 @@ from torch.optim.lr_scheduler import _LRScheduler
 import torch.optim as optim
 from torch import cuda, isinf, no_grad
 import torch.nn as nn
-from my_criterion import CE
+from my_criterion import CE, FL
 from my_utils import util
 from math import isnan
 from numpy import linspace, exp
@@ -35,6 +35,7 @@ class Trainer:
         self.cross_entropy = nn.CrossEntropyLoss()
         self.complement_entropy = CE.ComplementEntropy(self.device)
         self.gamma_for_cce = gamma_for_cce
+        self.focal_loss = FL.FocalLoss(gamma=2.0, alpha=0.25, size_average=True)
         # accuracy
         self.total, self.top1_correct, self.top5_correct = 0, 0, 0
         self.train_top1_acc_list, self.valid_top1_acc_list, self.test_top1_acc = [], [], None
@@ -69,7 +70,7 @@ class Trainer:
                + self.gamma_for_cce * self.complement_entropy(dic['outputs'], dic['targets'])
 
     def FL(self, dic):
-        pass
+        return self.focal_loss(dic['outputs'], dic['targets'])
 
     ####################################################################################################
 
