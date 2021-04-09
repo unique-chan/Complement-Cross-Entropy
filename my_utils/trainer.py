@@ -44,6 +44,8 @@ class Trainer:
         self.clip = clip
         # whether to show progress bar
         self.on_progress_bar = progress_bar
+        # to store model.state_dict()
+        self.model_state_dict = None
 
     def reset_acc_members(self):
         self.total, self.top1_correct, self.top5_correct = 0, 0, 0
@@ -149,6 +151,12 @@ class Trainer:
         with torch.no_grad():
             valid_loss, top1_acc_rate, top5_acc_rate = self.one_epoch(loader, lr_warmup=False,
                                                                       front_msg='Valid', cur_epoch=cur_epoch)
+            if len(self.valid_top1_acc_list) == 0:
+                self.model_state_dict = self.model.state_dict()
+            else:
+                if top1_acc_rate > max(self.valid_top1_acc_list):
+                    self.model_state_dict = self.model.state_dict()
+
             self.valid_loss_list.append(valid_loss)
             self.valid_top1_acc_list.append(top1_acc_rate)
             self.valid_top5_acc_list.append(top5_acc_rate)

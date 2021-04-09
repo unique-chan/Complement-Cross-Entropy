@@ -1,5 +1,7 @@
 import time
 import datetime
+
+import torch
 from torch import manual_seed, cuda, backends
 import numpy as np
 import random
@@ -50,6 +52,8 @@ def write_log(my_args, my_trainer):
                            'train_acc_top5_list': str(my_trainer.train_top5_acc_list),
                            'valid_acc_top5_list': str(my_trainer.valid_top5_acc_list)})
         writer.writerow(result_dic)
+        # model store
+        torch.save(my_trainer.model_state_dict, os.path.join(dir_name, cur_time + '.pth'))
 
 
 def parsed_arguments_dict(my_args):
