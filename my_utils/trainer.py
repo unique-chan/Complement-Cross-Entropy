@@ -19,8 +19,9 @@ class WarmUpLR(_LRScheduler):
 
 
 class Trainer:
-    def __init__(self, model, loader, lr, num_classes, loss_function, gamma_for_cce, lr_step, lr_step_gamma,
-                 total_epochs, warmup_epochs=5, clip=0, progress_bar=False, gpu_index=-1):
+    def __init__(self, model, loader, lr=0.1, loss_function='ERM', gamma_for_cce=-1,
+                 lr_step=[100, 150], lr_step_gamma=0.1,
+                 warmup_epochs=5, clip=0, progress_bar=False, gpu_index=-1):
         self.model = model
         self.optimizer = optim.SGD(model.parameters(), lr=lr, momentum=0.9, weight_decay=1e-4)
         self.warmup_scheduler = WarmUpLR(self.optimizer, len(loader) * warmup_epochs)

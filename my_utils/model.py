@@ -28,6 +28,10 @@ def resnet34_for_tiny(num_classes, pretrained):
     return rst.resnet34_for_tiny(num_classes=num_classes)
 
 
+def resnet34_for_tiny_and_t_sne(num_classes, pretrained):
+    return rst.resnet34_for_tiny(num_classes=num_classes, t_sne=True)
+
+
 def resnet50_for_tiny(num_classes, pretrained):
     return rst.resnet50_for_tiny(num_classes=num_classes)
 

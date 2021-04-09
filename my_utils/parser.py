@@ -6,8 +6,10 @@ class Parser:
         self.parser = argparse.ArgumentParser(description='Pytorch Image Classification (github.com/unique-chan)')
         if mode == 'train':
             self.add_arguments_for_train()      # train - valid
-        else:
+        elif mode == 'test':
             self.add_arguments_for_test()       # test
+        elif mode == 't-SNE':
+            self.add_arguments_for_t_SNE()      # t-SNE
 
     def parse_args(self):
         return self.parser.parse_args()
@@ -52,3 +54,21 @@ class Parser:
 
     def add_arguments_for_test(self):
         self.parser.add_argument('--datetime', type=str, help='datetime')
+
+    def add_arguments_for_t_SNE(self):
+        self.parser.add_argument('--model_path', type=str, help='model_path')
+        self.parser.add_argument('--network_name', type=str, help='network name')
+        self.parser.add_argument('--dataset_dir', type=str, help='dataset path')
+        self.parser.add_argument('--batch_size', default=128, type=int, help='batch_size (default: 128)')
+        self.parser.add_argument('--height', default=32, type=int, help='image height (default: 32)')
+        self.parser.add_argument('--width', default=32, type=int, help='image height (default: 32)')
+        self.parser.add_argument('--mean_std', action='store_true',
+                                 help='initially normalize the entire data '
+                                      'with the training mean and standard deviation')
+        self.parser.add_argument('--center_crop_size', default=0, type=int,
+                                 help='central cropping size for validation/test '
+                                      '(default: 0 (No center crop)) (eg. 56 -> 56 x 56 central cropping)')
+        self.parser.add_argument('--minus_1_to_plus_1_rescale', action='store_true',
+                                 help='rescale [0, 1] to [-1, 1] (for each image)')
+        self.parser.add_argument('--gpu_index', default=0, type=int,
+                                 help='[gpu_index = -1]: cpu / [gpu_index = 0]: gpu_0 ...')

@@ -81,7 +81,7 @@ class ResNetForTiny(nn.Module):
             self.in_channels = out_channels * block.expansion
         return nn.Sequential(*sub_layers)
 
-    def __init__(self, block, num_blocks, num_classes=100):
+    def __init__(self, block, num_blocks, num_classes=100, t_sne=False):
         super(ResNetForTiny, self).__init__()
 
         self.in_channels = 64
@@ -93,6 +93,8 @@ class ResNetForTiny(nn.Module):
         self.layer3 = self._create_layer(block, 256, num_blocks[2], stride=2)
         self.layer4 = self._create_layer(block, 512, num_blocks[3], stride=2)
         self.linear = nn.Linear(in_features=512 * block.expansion, out_features=num_classes)
+
+        self.t_sne = t_sne
 
     def forward(self, x):
         # conv1
@@ -111,6 +113,8 @@ class ResNetForTiny(nn.Module):
         # out = F.avg_pool2d(input=out, kernel_size=4)
         out = nn.AdaptiveAvgPool2d(output_size=(1, 1))(out)
         out = out.view(out.size()[0], -1)
+        if self.t_sne:
+            return out
         out = self.linear(out)
         return out
 
