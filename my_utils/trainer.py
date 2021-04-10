@@ -5,7 +5,7 @@ import torch.nn as nn
 from my_criterion import CE, FL
 from my_utils import util
 from math import isnan
-from numpy import linspace, exp
+import ast
 import torch
 
 
@@ -25,6 +25,8 @@ class Trainer:
         self.model = model
         self.optimizer = optim.SGD(model.parameters(), lr=lr, momentum=0.9, weight_decay=1e-4)
         self.warmup_scheduler = WarmUpLR(self.optimizer, len(loader) * warmup_epochs)
+        if type(lr_step) == str:
+            lr_step = ast.literal_eval(lr_step)
         self.lr_scheduler = optim.lr_scheduler.MultiStepLR(self.optimizer, milestones=lr_step, gamma=lr_step_gamma)
         self.device = 'cuda:%d' % gpu_index if cuda.is_available() else 'cpu'
         print('* The model is loaded into [{}].'.format(self.device))

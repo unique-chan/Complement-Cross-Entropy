@@ -3,7 +3,7 @@
 *.sh
 *.jpg
 *.png
-run.sh
+cifar-step.sh
 my_logs/
 venv/
 

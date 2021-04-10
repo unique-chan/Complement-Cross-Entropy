@@ -80,10 +80,11 @@ def scale_to_01_range(x):
 
 tsne = TSNE(n_components=2).fit_transform(features)
 tx, ty = tsne[:, 0], tsne[:, 1]
-tx, ty = scale_to_01_range(tx), scale_to_01_range(ty)
+# tx, ty = scale_to_01_range(tx), scale_to_01_range(ty)
 
 fig = plt.figure()
 ax = fig.add_subplot(111)
+
 
 colors_per_class = {
     'T-shirt/top' : [254, 202, 87],
