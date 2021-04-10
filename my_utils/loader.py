@@ -17,6 +17,7 @@ class Loader:
         self.test_dir = os.path.join(dataset_path, 'test')
         self.num_workers = num_workers
         self.num_classes = Loader.__get_num_classes(self.train_dir)
+        self.classes = Loader.__get_classes(self.train_dir)
         self.image_height, self.image_width = image_height, image_width
         self.batch_size = batch_size
         self.mean_std = mean_std
@@ -53,6 +54,10 @@ class Loader:
     @staticmethod
     def __get_num_classes(root_dir):
         return len([dir_ for dir_ in os.listdir(root_dir) if not os.path.isfile(dir_)])
+
+    @staticmethod
+    def __get_classes(root_dir):
+        return sorted([dir_ for dir_ in os.listdir(root_dir) if not os.path.isfile(dir_)])
 
     def get_train_transform(self):
         transforms_list = [
