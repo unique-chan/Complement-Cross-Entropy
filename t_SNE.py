@@ -22,9 +22,8 @@ from my_utils import parser, loader, model, util
 
 # This code is only compatible with 'resnet34_for_tiny_and_t_sne' (network) & 'Fashion-MNIST' (dataset).
 # Try to run this code as follows:
-# 1/
-# 2/
-# 3/
+# python3 confusion_matrix.py --model_path='my_logs/21-04-10-13-44-15.pth' --network_name='resnet34_for_tiny' --dataset_dir='../CIFAR-10-lt-100' --height=32 --width=32  --mean_std
+
 # And attempt to change this code for your purpose.
 
 
