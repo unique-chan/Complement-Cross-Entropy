@@ -18,26 +18,23 @@ Last modified in **May 5, 2021**.
 ## How to use
 1. The directory structure of your dataset should be as follows.
 ~~~
-|—— 📁 a_datasets 
-	|—— 📁 your_own_splitted_dataset_1
-		|—— 📁 train
-			|—— 📁 class_1
-				|—— 🖼️ 1.jpg
-				|—— ...
-			|—— 📁 class_2 
-				|—— 🖼️ ...
-		|—— 📁 valid
-			|—— 📁 class_1
-			|—— 📁 ... 
-		|—— 📁 test
-			|—— 📁 class_1
-			|—— 📁 ... 
-	|—— 📁 your_own_splitted_dataset_2
-	|—— 📁 ...
+|—— 📁 your_own_dataset
+	|—— 📁 train
+		|—— 📁 class_1
+			|—— 🖼️ 1.jpg
+			|—— ...
+		|—— 📁 class_2 
+			|—— 🖼️ ...
+	|—— 📁 valid
+		|—— 📁 class_1
+		|—— 📁 ... 
+	|—— 📁 test
+		|—— 📁 class_1
+		|—— 📁 ... 
 ~~~
 
 2. Run **train.py** for training. The below is an example.
-~~~
+~~~ME
 python3 train.py --loss_func='CCE' --gamma=-1 --network_name='efficientnet_b0' --dataset_dir='../svhn' --height=32 --width=32 
 --epochs=200 --lr=0.1 --lr_warmup_epochs=5 --mean_std --progress_bar --minus_1_to_plus_1_rescale --gpu_index=1 --store
 ~~~
