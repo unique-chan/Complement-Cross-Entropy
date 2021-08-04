@@ -3,8 +3,6 @@
 
 [Cite this Paper](https://arxiv.org/abs/2009.02189) (🎉 Our paper is accepted to ***Pattern Recognition Letters*** (IF: 3.756).)
 
-Last modified in **May 5, 2021**.
-
 ## This repository contains:
 - Training code for image classification
 - Proposed loss function for classification 
