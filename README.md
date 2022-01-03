@@ -5,7 +5,7 @@
 
 ## This repository contains:
 - Complement Cross Entropy (code) 
-- For simplicity, classification code is provided separately in this [GitHub repo](https://github.com/unique-chan/Simple-Image-Classification): you can easily use `Complement Cross Entropy` by passing `--loss_function='CCE'` for executing `train.py`. For details, please visit the above repository.
+- For simplicity, classification code is provided separately in this [GitHub repo 🖱️](https://github.com/unique-chan/Simple-Image-Classification): you can easily use `Complement Cross Entropy` by passing `--loss_function='CCE'` for executing `train.py`. For details, please visit the above repository.
 
 ## Prerequisites
 * See REQUIREMENTS.txt
