@@ -44,7 +44,7 @@ class CCE(nn.Module):
 
 
 ## Contribution
-If you find any bugs or have opinions for further improvements, please feel free to create a pull request. All contributions are welcome.
+If you find any bugs or have opinions for further improvements, please feel free to create a pull request or contact me (yechankim@gm.gist.ac.kr). All contributions are welcome.
 
 ## Reference
 1. Hao-Yun Chen, Pei-Hsin Wang, Chun-Hao Liu, Shih-Chieh Chang, Jia-Yu Pan, Yu-Ting Chen, Wei Wei, and Da-Cheng Juan. Complement objective training. arXiv preprint arXiv:1903.01182, 2019.
