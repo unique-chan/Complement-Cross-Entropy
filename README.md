@@ -37,7 +37,7 @@ class CCE(nn.Module):
         y_zerohot = torch.ones(batch_size, yHat.shape[1]).scatter_(
             1, y.view(batch_size, 1).data.cpu(), 0)
         output = Px * Px_log * y_zerohot.to(device=self.device)
-        complement_entropy = torch.sum(output) / (float(batch_size) * float(yHat.shape[1])
+        complement_entropy = torch.sum(output) / (float(batch_size) * float(yHat.shape[1]))
 
         return cross_entropy - self.balancing_factor * complement_entropy
 ```
