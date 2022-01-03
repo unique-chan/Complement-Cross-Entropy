@@ -4,39 +4,43 @@
 [Cite this Paper](https://doi.org/10.1016/j.patrec.2021.07.017) (🎉 Our paper is accepted to ***Pattern Recognition Letters***.)
 
 ## This repository contains:
-- Training code for image classification
-- Proposed loss function for classification 
-- Evaluation code for image classification
-	- Confusion Matrix (see confusion_matrix.py)
-	- t_SNE Embedding (see t_SNE.py)
+- Complement Cross Entropy (code) 
+- For simplicity, classification code is provided separately: [GitHub](https://github.com/unique-chan/Simple-Image-Classification). In this code, you can easily use `Complement Cross Entropy` by passing `--loss_function='CCE'` for executing `train.py`. For details, please visit the above repository.
 
 ## Prerequisites
 * See REQUIREMENTS.txt
+```
+torch
+torchvision
+```
 
-## How to use
-1. The directory structure of your dataset should be as follows.
-~~~
-|—— 📁 your_own_dataset
-	|—— 📁 train
-		|—— 📁 class_1
-			|—— 🖼️ 1.jpg
-			|—— ...
-		|—— 📁 class_2 
-			|—— 🖼️ ...
-	|—— 📁 valid
-		|—— 📁 class_1
-		|—— 📁 ... 
-	|—— 📁 test
-		|—— 📁 class_1
-		|—— 📁 ... 
-~~~
+## Code
+```python
+class CCE(nn.Module):
+    def __init__(self, device, balancing_factor=1):
+        super(CCE, self).__init__()
+        self.nll_loss = nn.NLLLoss()
+        self.device = device # {'cpu', 'cuda:0', 'cuda:1', ...}
+        self.balancing_factor = balancing_factor
 
-2. Run **train.py** for training. The below is an example.
-~~~ME
-python3 train.py --loss_func='CCE' --gamma=-1 --network_name='efficientnet_b0' --dataset_dir='../svhn' --height=32 --width=32 
---epochs=200 --lr=0.1 --lr_warmup_epochs=5 --mean_std --progress_bar --minus_1_to_plus_1_rescale --gpu_index=1 --store
-~~~
-See **my_utils/parser.py** for details.
+    def forward(self, yHat, y):
+        # Note: yHat.shape[1] <=> number of classes
+        batch_size = len(y)
+        # cross entropy
+        cross_entropy = self.nll_loss(F.log_softmax(yHat, dim=1), y)
+        # complement entropy
+        yHat = F.softmax(yHat, dim=1)
+        Yg = yHat.gather(dim=1, index=torch.unsqueeze(y, 1))
+        Yg_ = (1 - Yg) + 1e-7
+        Px = yHat / Yg_.view(len(yHat), 1)
+        Px_log = torch.log(Px + 1e-10)
+        y_zerohot = torch.ones(batch_size, yHat.shape[1]).scatter_(
+            1, y.view(batch_size, 1).data.cpu(), 0)
+        output = Px * Px_log * y_zerohot.to(device=self.device)
+        complement_entropy = torch.sum(output) / (float(batch_size) * float(yHat.shape[1])
+
+        return cross_entropy - self.balancing_factor * complement_entropy
+```
 
 
 ## Contribution
