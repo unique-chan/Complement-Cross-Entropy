@@ -31,8 +31,7 @@ class CCE(nn.Module):
         # complement entropy
         yHat = F.softmax(yHat, dim=1)
         Yg = yHat.gather(dim=1, index=torch.unsqueeze(y, 1))
-        Yg_ = (1 - Yg) + 1e-7
-        Px = yHat / Yg_.view(len(yHat), 1)
+        Px = yHat / (1 - Yg) + 1e-7
         Px_log = torch.log(Px + 1e-10)
         y_zerohot = torch.ones(batch_size, yHat.shape[1]).scatter_(
             1, y.view(batch_size, 1).data.cpu(), 0)
