@@ -41,6 +41,19 @@ class CCE(nn.Module):
         return cross_entropy - self.balancing_factor * complement_entropy
 ```
 
+## Citation
+If you use this code for your research, please cite the following paper:
+~~~ME
+@article{kim2021imbalanced,
+  title={Imbalanced image classification with complement cross entropy},
+  author={Kim, Yechan and Lee, Younkwan and Jeon, Moongu},
+  journal={Pattern Recognition Letters},
+  volume={151},
+  pages={33--40},
+  year={2021},
+  publisher={Elsevier}
+}
+~~~
 
 ## Contribution
 If you find any bugs or have opinions for further improvements, please feel free to create a pull request or contact me (yechankim@gm.gist.ac.kr). All contributions are welcome.
