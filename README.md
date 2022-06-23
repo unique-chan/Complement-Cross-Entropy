@@ -3,6 +3,10 @@
 
 [Cite this Paper](https://doi.org/10.1016/j.patrec.2021.07.017) (🎉 Our paper is accepted to ***Pattern Recognition Letters***.)
 
+## News:
+- Now, you can easily try our loss function with **[Holocron](https://github.com/frgfm/Holocron)**. Holocron includes implementations of recent Deep Learning tricks in computer vision, easily paired up with your favorite framework and model zoo.
+
+
 ## This repository contains:
 - Complement Cross Entropy (code) 
 - For simplicity, classification code is provided separately in this [GitHub repo 🖱️](https://github.com/unique-chan/Simple-Image-Classification): you can easily use `Complement Cross Entropy` by passing `--loss_function='CCE'` for executing `train.py`. For details, please visit the above repository.
